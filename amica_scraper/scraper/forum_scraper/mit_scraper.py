@@ -96,7 +96,7 @@ class MitScraper():
 
         df = DfHandler.make_comment_df()
 
-        for i in range(65091579, 1, -2):
+        for i in range(34715667, 1, -2):
             chrome_options = os.set_options()
             driver = webdriver.Chrome(options=chrome_options)
             driver.set_page_load_timeout(10)

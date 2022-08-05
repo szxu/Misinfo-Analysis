@@ -1,4 +1,5 @@
 import pandas as pd
+import traceback
 
 class DfHandler():
     @staticmethod
@@ -79,25 +80,45 @@ class DfHandler():
         if web_name == 'WXC':
             if cat_name == 'morenews':
                 df['link'] = 'https://www.wenxuecity.com/news/' + df['ID'].apply(remove_comment_from_link) + '.html'
+            elif cat_name == 'currentevent' or cat_name == 'military':
+                df['link'] = 'https://bbs.wenxuecity.com/' + cat_name + '/' + df['ID'].astype(str) + '.html'
+            else:
+                df['link'] = ""
         elif web_name == 'MIT':
             df['link'] = 'https://www.mitbbs.com/article/' + cat_name + '/' + df['ID'].astype(str) + '_3.html'
+        else:
+            df['link'] = ""
 
         return df
+
+
+
+    @staticmethod
+    def update_reply_count(df):
+        df_copy = df.copy()
+        for idx in df.index:
+            if df["Is Article"][idx] == True:
+                reply_count = df[df["Parent ID"] == df_copy["ID"][idx]]["ID"].count()
+                df_copy["Reply Count"][idx] = reply_count - 1 if reply_count > 0 else reply_count
+
+        return df_copy
+
 
     @staticmethod
     def update(df):
         df = DfHandler.update_parent(df)
         df = DfHandler.update_link(df)
+        df = DfHandler.update_reply_count(df)
         return df
 
 
 # if __name__ == '__main__':
-#     path = '/home/ktonxu/project/coen493/Misinfo Analysis/amica_scraper/files/forum/MIT/MIT_USANews_2022-06-19_2022-06-19.csv'
+#     path = '/home/ktonxu/project/AMICA/AMICA-scraper/files/forum/WXC/WXC_military_2022-07-14_2022-07-14.csv'
 #     df = pd.read_csv(path)
 #     try:
-#         df = DfHandler.update_link(df)
-#     except Exception as ex:
-#         print(ex)
+#         df = DfHandler.update(df)
+#     except:
+#         print(traceback.format_exc())
 #
 #     df.to_csv(path, index=False)
 

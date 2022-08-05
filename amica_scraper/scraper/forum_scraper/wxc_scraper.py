@@ -27,12 +27,13 @@ class WxcScraper():
         c_driver.close()
         return text
 
-    def get_article_content(self, post, df, target):
+    def get_article_content(self, post, df, target, isend):
         comments = post.find_elements(By.TAG_NAME, 'p')
         parent_id = ""
         for i in range(len(comments)):
             print("+" * 20)
             comment = comments[i]
+            print(comment.text)
             links = comment.find_elements(By.TAG_NAME, 'a')
             title = str(links[0].text)
             commentUrl = links[0].get_attribute('href')
@@ -94,7 +95,7 @@ class WxcScraper():
         posts = driver.find_elements(By.CLASS_NAME, "odd") + driver.find_elements(By.CLASS_NAME, "even")
         for post in posts:
             try:
-                df, isend = self.get_article_content(post, df, target)
+                df, isend = self.get_article_content(post, df, target, isend)
             except :
                 print(traceback.format_exc())
         return df, isend
