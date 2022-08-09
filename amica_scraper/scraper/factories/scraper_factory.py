@@ -18,6 +18,7 @@ class ScraperFactory():
 
         else:
             scraper = None
+            print("This website does not support FORUM-based scraping.")
 
         return scraper.init(target)
 
@@ -27,6 +28,7 @@ class ScraperFactory():
             scraper = WxcNewsScraper()
         else:
             scraper = None
+            print("This website does not support NEWS-based scraping.")
 
         return scraper.init(target)
 
@@ -36,5 +38,6 @@ class ScraperFactory():
             scraper = MitUserScraper()
         else:
             scraper = None
+            print("This website does not support USER-based scraping.")
 
         return scraper.init(target)

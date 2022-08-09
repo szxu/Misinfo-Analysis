@@ -10,6 +10,7 @@ class TextSegmenter():
     def __init__(self):
         jieba.del_word('自定义词')
 
+    @staticmethod
     def seg(text_sent):
         words = jieba.cut(text_sent, cut_all=False)
         return " ".join(words)

@@ -92,29 +92,29 @@ class App():
             else:
                 print("Please enter a valid source type!")
 
-    def fake_user_input(self):
-        target = {}
-        global BASE_PATH
-        BASE_PATH = os.path.dirname(os.path.abspath(__file__)) + '/../'
-
-        target["source_type_input"] = "forum".lower()
-        target["web_name"] = "MIT"
-        target["file_type"] = "csv"
-
-        if target["source_type_input"] == "user":
-            target["user_id"] = "beijingren3"
-            self.scrap_user(target)
-        else:
-            target["cat_name"] = "USANews"
-            target["start_date"] = date(2022, 7, 7)
-            target["end_date"] = date(2022, 7, 7)
-            print("This program scraps from " + str(target["start_date"]) + ' to ' + str(target["end_date"]))
-            if target["source_type_input"] == "news":
-                self.scrap_news(target)
-            elif target["source_type_input"] == "forum":
-                self.scrap_forum(target)
-            else:
-                print("Please enter a valid source type!")
+    # def fake_user_input(self):
+    #     target = {}
+    #     global BASE_PATH
+    #     BASE_PATH = os.path.dirname(os.path.abspath(__file__)) + '/../'
+    #
+    #     target["source_type_input"] = "forum".lower()
+    #     target["web_name"] = "MIT"
+    #     target["file_type"] = "csv"
+    #
+    #     if target["source_type_input"] == "user":
+    #         target["user_id"] = "beijingren3"
+    #         self.scrap_user(target)
+    #     else:
+    #         target["cat_name"] = "USANews"
+    #         target["start_date"] = date(2022, 7, 7)
+    #         target["end_date"] = date(2022, 7, 7)
+    #         print("This program scraps from " + str(target["start_date"]) + ' to ' + str(target["end_date"]))
+    #         if target["source_type_input"] == "news":
+    #             self.scrap_news(target)
+    #         elif target["source_type_input"] == "forum":
+    #             self.scrap_forum(target)
+    #         else:
+    #             print("Please enter a valid source type!")
 
 
     def init(self):
