@@ -14,3 +14,7 @@ class News:
         running_df.loc[len(running_df.index)] = [self.id, self.web, self.cat, self.title, self.txt, self.source
             , self.time, self.read_count, self.stxt]
         return running_df
+
+    def print_news(self):
+        print([self.id, self.web, self.cat, self.title, self.txt, self.source
+            , self.time, self.read_count, self.stxt])

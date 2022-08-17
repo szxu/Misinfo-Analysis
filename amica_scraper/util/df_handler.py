@@ -25,15 +25,30 @@ class DfHandler():
 
     @staticmethod
     def make_news_df():
-        df = pd.DataFrame({"ID":[],"Website":[],
-                                            "Category":[],
-                                            "News Title":[],
-                                            "News Text":[],
-                                            "Source":[],
-                                            "Time":[],
-                                            "Read Count": [],
-                                            "Segmented Text":[]})
+        df = pd.DataFrame({"ID":[],
+                           "Website":[],
+                           "Category":[],
+                           "News Title":[],
+                           "News Text":[],
+                           "Source":[],
+                           "Time":[],
+                           "Read Count": [],
+                           "Segmented Text":[]})
         return df
+
+    @staticmethod
+    def make_fact_df():
+        df = pd.DataFrame({"ID": [],
+                           "Website": [],
+                           "Category": [],
+                           "Is Fact": [],
+                           "Fact Title": [],
+                           "Fact Text": [],
+                           "Time": [],
+                           "Read Count": [],
+                           "Segmented Text": []})
+        return df
+
 
     @staticmethod
     def get_ids(df):
@@ -86,12 +101,12 @@ class DfHandler():
                 df['link'] = ""
         elif web_name == 'MIT':
             df['link'] = 'https://www.mitbbs.com/article/' + cat_name + '/' + df['ID'].astype(str) + '_3.html'
+        elif web_name == "PYB":
+            df['link'] = "https://www.piyaoba.org/pyb_feature/" + df['ID'].astype(str) + "/"
         else:
             df['link'] = ""
 
         return df
-
-
 
     @staticmethod
     def update_reply_count(df):
@@ -110,6 +125,7 @@ class DfHandler():
         df = DfHandler.update_link(df)
         df = DfHandler.update_reply_count(df)
         return df
+
 
 
 # if __name__ == '__main__':

@@ -14,3 +14,16 @@ class Input():
         target["end_date"] = Input.get_startend_date('end')
         print("This program scraps from " + str(target["start_date"]) + ' to ' + str(target["end_date"]))
         return target
+
+class Output():
+    @staticmethod
+    def set_filename(type, target):
+        filename = " "
+        if type == "news":
+            if target["web_name"] == "WXC":
+                filename = target["web_name"] + "_" + target["cat_name"] + "_" + str(target["start_date"]) + "_" + str(
+                    target["end_date"])
+            elif target["web_name"] == "PYB":
+                filename = target["web_name"] + "_" + str(datetime.today())
+
+        return filename
